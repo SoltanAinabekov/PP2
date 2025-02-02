@@ -7,3 +7,4 @@ class Point:
         self.y = y
 
 q=Point(0,0)
+#Definition: a model for a point in two-dimensional space
