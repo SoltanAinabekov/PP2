@@ -5,4 +5,4 @@ def snake_to_camel(string):
     words = string.split('_')
     return words[0] + ''.join(word.capitalize() for word in words[1:])
 
-print(snake_to_camel("this_is_a_test"))
+print(snake_to_camel("Hello_world"))

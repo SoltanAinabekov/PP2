@@ -5,4 +5,4 @@ def camel_to_snake(string):
     pattern = r'([a-z])([A-Z])'
     return re.sub(pattern, r'\1_\2', string).lower()
 
-print(camel_to_snake("thisIsATestString"))
+print(camel_to_snake("HelloWorld"))

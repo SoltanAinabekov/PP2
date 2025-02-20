@@ -5,4 +5,4 @@ def split_at_uppercase(string):
     pattern = r'[A-Z][a-z]*'
     return re.findall(pattern, string)
 
-print(split_at_uppercase("ThisIsATestString"))
+print(split_at_uppercase("HelloWorld"))

@@ -5,4 +5,4 @@ def replace_with_colon(string):
     pattern = r'[ ,.]'
     return re.sub(pattern, ":", string)
 
-print(replace_with_colon("Hello, world. This is a test"))
+print(replace_with_colon("Hello, world. Hello"))

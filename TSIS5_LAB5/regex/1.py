@@ -6,7 +6,5 @@ def match_a_b(string):
     return bool(re.fullmatch(pattern, string))
 
 print(match_a_b("a")) 
-print(match_a_b("ab"))
-print(match_a_b("abb"))    
-print(match_a_b("aab"))    
+print(match_a_b("ab"))   
 print(match_a_b("b"))       
