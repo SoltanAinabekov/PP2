@@ -11,4 +11,4 @@ def delete_file(path):
     else:
         print("File does not exist.")
 
-delete_file(r"C:\Users\Admin\Desktop\PP2-Repos\PP2\TSIS6_LAB6\files_and_dirs\test.txt")
+delete_file(r"SoltanAinabekov/PP2/TSIS6_LAB6/files_and_dirs/test.txt")

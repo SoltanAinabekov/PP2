@@ -7,5 +7,5 @@ def check_access(path):
     print(f"Writable: {os.access(path, os.W_OK)}")
     print(f"Executable: {os.access(path, os.X_OK)}")
 
-path = "test.txt"
+path = r"SoltanAinabekov/PP2/TSIS6_LAB6/files_and_dirs/test.txt"
 check_access(path)
