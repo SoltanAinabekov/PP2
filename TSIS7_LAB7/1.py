@@ -1,56 +1,46 @@
 import pygame
-import time
-import math
+import sys
 from datetime import datetime
 
 pygame.init()
 
-clock_img = pygame.image.load("mickeyclock.png")
+clock = pygame.image.load("clock.png")
+min_hand = pygame.image.load("min_hand.png")
+sec_hand = pygame.image.load("sec_hand.png")
 
-original_width, original_height = clock_img.get_size()
+WIDTH, HEIGHT = clock.get_size()
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Mickey Clock")
+CENTER = (WIDTH // 2, HEIGHT // 2)
 
-new_width = int(original_width * 0.7)
-new_height = int(original_height * 0.7)
-
-clock_img = pygame.transform.smoothscale(clock_img, (new_width, new_height))
-
-screen = pygame.display.set_mode((new_width, new_height))
-pygame.display.set_caption("Mickey Mouse Clock")
-
-clock_center = (new_width // 2, new_height // 2)
-
-minute_length = new_width // 5
-second_length = new_width // 4
-
-def get_hand_position(angle, length):
-    rad = math.radians(angle)
-    x = clock_center[0] + length * math.cos(rad)
-    y = clock_center[1] - length * math.sin(rad)
-    return int(x), int(y)
+def rotate_image(image, angle, pivot):
+    rotated_image = pygame.transform.rotate(image, angle)
+    new_rect = rotated_image.get_rect(center=pivot)
+    return rotated_image, new_rect
 
 running = True
 while running:
-    screen.fill((255, 255, 255))
-    screen.blit(clock_img, (0, 0))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
     now = datetime.now()
     minutes = now.minute
     seconds = now.second
 
-    minute_angle = 90 - (minutes % 60) * 6
-    second_angle = 90 - (seconds % 60) * 6
+    min_angle = - (minutes * 6) - 48
+    sec_angle = - (seconds * 6) + 54
 
-    minute_end = get_hand_position(minute_angle, minute_length)
-    second_end = get_hand_position(second_angle, second_length)
+    screen.blit(clock, (0, 0))
 
-    pygame.draw.line(screen, (0, 0, 255), clock_center, minute_end, 8)
-    pygame.draw.line(screen, (255, 0, 0), clock_center, second_end, 4)
+    min_rotated, min_rect = rotate_image(min_hand, min_angle, CENTER)
+    screen.blit(min_rotated, min_rect)
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+    sec_rotated, sec_rect = rotate_image(sec_hand, sec_angle, CENTER)
+    screen.blit(sec_rotated, sec_rect)
 
     pygame.display.flip()
-    time.sleep(1)
+    pygame.time.Clock()
 
 pygame.quit()
+sys.exit()
