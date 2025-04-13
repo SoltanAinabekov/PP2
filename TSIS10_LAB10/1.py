@@ -1,6 +1,7 @@
 import psycopg2
 import csv
 
+# connect to postgres tables
 def get_connection():
     return psycopg2.connect(
         dbname="postgres",
@@ -24,6 +25,7 @@ def create_table():
     cur.close()
     conn.close()
 
+# insert from csv
 def insert_from_csv(file_path):
     conn = get_connection()
     cur = conn.cursor()
@@ -39,6 +41,7 @@ def insert_from_csv(file_path):
     cur.close()
     conn.close()
 
+# insert from console
 def insert_from_console():
     name = input("Enter name: ")
     phone = input("Enter phone: ")
@@ -54,6 +57,7 @@ def insert_from_console():
         cur.close()
         conn.close()
 
+# update data
 def update_data():
     field = input("Update (1) Name or (2) Phone? Enter 1 or 2: ")
     identifier = input("Search by phone or name: ")
@@ -73,6 +77,7 @@ def update_data():
         cur.close()
         conn.close()
 
+# query data (filter search)
 def query_data():
     field = input("Filter by (1) Name or (2) Phone? Enter 1 or 2: ")
     value = input("Enter filter value: ")
@@ -92,6 +97,7 @@ def query_data():
         cur.close()
         conn.close()
 
+# delete data
 def delete_data():
     value = input("Enter name or phone to delete: ")
     conn = get_connection()
@@ -106,9 +112,34 @@ def delete_data():
         cur.close()
         conn.close()
 
-# Create table on run
+# menu
 if __name__ == '__main__':
     create_table()
     print("PhoneBook Ready.")
-
-query_data()
+    while True:
+        print("""
+Choose an action:
+1. Insert from CSV file
+2. Insert from console
+3. Update entry
+4. Query entries
+5. Delete entry
+6. Exit
+        """)
+        choice = input("Enter choice (1-6): ")
+        if choice == "1":
+            path = input("Enter CSV file path: ")
+            insert_from_csv(path)
+        elif choice == "2":
+            insert_from_console()
+        elif choice == "3":
+            update_data()
+        elif choice == "4":
+            query_data()
+        elif choice == "5":
+            delete_data()
+        elif choice == "6":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Try again.")
